@@ -4,9 +4,9 @@ import cors from 'cors';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import initializeDb from './db';
-import middleware from './middleware';
 import api from './api';
 import config from './config.js';
+import './lib/mailer'
 
 let app = express();
 app.server = http.createServer(app);
@@ -25,13 +25,13 @@ app.use(bodyParser.json({
 }));
 
 // connect to db
-initializeDb( () => {
-
-	// internal middleware
-	app.use(middleware());
-
+initializeDb( (err, db) => {
+	if(err){
+		console.log('Error happened. Server couldn\'t serve you')
+		return;
+	}
 	// api router
-	app.use('/api', api({ config }));
+	app.use('/api', api({ db }));
 
 	app.server.listen(process.env.PORT || config.port, () => {
 		console.log(`Started on port ${app.server.address().port}`);

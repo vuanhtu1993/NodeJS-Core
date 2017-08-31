@@ -1,7 +1,13 @@
-import mongoose from 'mongoose';
 import config from './config';
+import {MongoClient} from 'mongodb'
 export default callback => {
-	// connect to a database if needed, then pass it to `callback`:
-  mongoose.connect(config.database); // connect to database
-	callback();
+    MongoClient.connect(config.database, (err, db) => {
+        if (err) {
+            console.log('Error initializing connection to MongoDB')
+            callback(err)
+            return;
+        }
+        callback(null, db);
+    })
+
 }
