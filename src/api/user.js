@@ -91,6 +91,7 @@ export default ({db}) => {
           return res.json({
               Status: true,
               NewToken: res.NEW_TOKEN,
+              DatSize: propArray.length,
               FresherList: propArray,
           })
         })
