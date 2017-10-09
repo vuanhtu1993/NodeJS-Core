@@ -58,66 +58,42 @@ export default ({db}) => {
             });
         })
     })
-// define the about route
-    router.post('/list-user', function (req, res) {
-        const {email, status} = req.__USER__
+  /**
+   * Get list fresher, only for ADMIN role
+   */
+  router.post('/list-fresher', function (req, res) {
+        const {status} = req.__USER__
         const role = status // Status actually is role, when add to jwt I changed role to status
 
-        if (role === USER_ROLES.USER) {
-            // is normal user, so just return himself only
-            db.collection('users').findOne({
-                email,
-                active: true
-            }).then(data => res.json({Status: true, Users: [data]}))
-                .catch((e) => {
-                    res.json({
-                        Status: false,
-                        NewToken: res.NEW_TOKEN,
-                        StatusCode: RESPONSE_CODES.ERROR_HAPPENED,
-                        Message: 'Error happen while retrieving list of users'
-                    })
-                })
-        } else if (role === USER_ROLES.MODERATOR) {
-            // is Moderators
-            db.collection('users').find({
-                moderator: email,
-                active: true,
-            }).then(data => res.json({Status: true, Users: [data]}))
-                .catch((e) => {
-                    res.json({
-                        Status: false,
-                        NewToken: res.NEW_TOKEN,
-                        StatusCode: RESPONSE_CODES.ERROR_HAPPENED,
-                        Message: 'Error happen while retrieving list of users'
-                    })
-                })
-        } else if (role === USER_ROLES.ADMIN) {
-            // Is administrator
-            let propArray = []
-            db.collection('users').find({
-                active: true,
-            },{
-                email: 1, tokenLifeSpan: 1, active: 1, birthday: 1, role: 1, avatar: 1
-            }).toArray(function (err, result) {
-                var i, count;
-                for (i = 0, count = result.length; i < count; i++) {
-                    propArray.push(result[i]);
-                }
-                return res.json({
-                    Status: true,
-                    NewToken: res.NEW_TOKEN,
-                    Users: propArray,
-                })
-            })
+        if (role !== USER_ROLES.ADMIN) {
+          res.json({
+            Status: false,
+            NewToken: res.NEW_TOKEN,
+            StatusCode: RESPONSE_CODES.AUTHENTICATION.NO_ROLE,
+            Message: 'You are not allowed to access this resource'
+          })
+          return
         }
-        else {
-            res.json({
-                Status: false,
-                NewToken: res.NEW_TOKEN,
-                StatusCode: RESPONSE_CODES.AUTHENTICATION.NO_ROLE,
-                Message: 'Seem that some problem happened. You must be either normal user, moderator or administrator'
-            })
-        }
+        // Is administrator
+        db.collection('users').find({
+          active: true,
+          role: USER_ROLES.FRESHER
+        },{
+          email: 1, tokenLifeSpan: 1, active: 1, birthday: 1, role: 1, avatar: 1, fullName: 1,
+          applicationDate: 1, dob: 1, gender: 1, university: 1, major: 1, channel: 1, note: 1, skill: 1,
+          foreignLanguage: 1, entryTest: 1
+        }).toArray(function (err, result) {
+          let propArray = []
+          var i, count;
+          for (i = 0, count = result.length; i < count; i++) {
+              propArray.push(result[i]);
+          }
+          return res.json({
+              Status: true,
+              NewToken: res.NEW_TOKEN,
+              FresherList: propArray,
+          })
+        })
     })
 
     router.post('/register', (req, res) => {

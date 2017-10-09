@@ -1,7 +1,7 @@
  const USER_ROLES = {
-    ADMIN: 3,
+    ADMIN: 1,
     MODERATOR: 2,
-    USER: 1,
+    FRESHER: 3,
 }
 
  const RESPONSE_CODES = {
