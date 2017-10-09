@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { Router } from 'express';
 import user from './user';
+import course from './course';
 import { generateToken } from '../lib/util'
 import config from '../config';
 
@@ -42,6 +43,7 @@ export default ({db}) => {
 
 	// mount the APIs
 	api.use('/user', user({db}));
+	api.use('/course', course({db}));
 
 	// perhaps expose some API metadata at the root
 	api.get('/', (req, res) => {

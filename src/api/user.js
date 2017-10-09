@@ -21,11 +21,10 @@ export default ({db}) => {
 // Authenticate user
     router.post('/authenticate', (req, res) => {
         // TODO: validate email, makesure it has valid value
-        const {email, password} = req.body
-        console.log(req.body)
+        const {email, password, role} = req.body
         // generatePassHash('123456') //- e9c4963bc81007eec195ae9521b91633fb81e3bc844e99f10e864f85b7bb7451fa8b5f0f1df8ffbb125e4ce63334b6f02Avbjdpkt/HXUvSnb+85Vg==
         db.collection('users').findOne({
-            email
+            email, role
         }).then((user) => {
             if (!user) {
                 res.json({
@@ -42,7 +41,6 @@ export default ({db}) => {
                         Message: 'Authentication failed. User email or password is not valid.'
                     });
                 } else {
-
                     // if user is found and password is right
                     // create a token
                     let token = generateToken({email, role: user.role, tokenLifeSpan: user.tokenLifeSpan})
