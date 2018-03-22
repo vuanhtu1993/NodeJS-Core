@@ -7,5 +7,16 @@ có thể chạy được ở phía server (tức là môi trường của hệ 
 * 5 bước để tạo một web server như sau:
 1. tạo file package.json
 2. Install webpack (yarn add --dev webpack)
-
-
+3. Create file webpack.config.js
+```
+module.exports = {
+    entry: ['./src/app/index.js'],
+    output: {
+        path: __dirname + '/src/build/',
+        filename: 'bundle.js',
+    }
+};
+```
+4. yarn add babel-core babel-loader webpack-dev-server babel-preset-es2015 babel-polyfill --dev
+5.
+6.
