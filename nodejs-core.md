@@ -55,3 +55,21 @@ module.exports = {
     "presets": ["es2015"]
   },
 ```
+7. Module trong nodeJs (hiểu đơn giản module là một file)
+```
+Module có thể hiểu đơn giản như là một file, trong đó có các hàm cũng
+như biến được export ra bên ngoài cho các file khác sử dụng
+
+// khai báo trong file rectangle.js
+module.export = {
+    circumference: (weight, height) => { (weight + height)*2 },
+    area: (weight, height) => { weight*height }
+}
+
+sử dụng ở một file khác index.js
+const rectangle = required('/Shape/rectangle');
+rectangle.area(10, 20);
+rectangle.circumference(5, 10);
+```
+8. HTTP Module:
+ - Là một module quan trong cho
