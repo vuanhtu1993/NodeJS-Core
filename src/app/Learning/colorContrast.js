@@ -1,3 +1,5 @@
+const brain = require('brain.js');
+
 $(function () {
     $("#wheel-demo").minicolors({
         control: $("#wheel-demo").attr('data-control') || 'hue',
@@ -13,19 +15,18 @@ $(function () {
             console.log(rgb);
 
             /*=====Lấy mạng Neural đã được training nhận diện đậm nhạt và truyền mã màu vừa chọn vào để nó nhận diện sáng tối=====*/
-            const resultA = brain.likely(rgb, ColorDarknetwork)
+            const resultA = brain.likely(rgb, ColorDarknetwork);
             $("#example").css("background", hex);
             $("#example").css("color", resultA === "dark" ? "white" : "black");
 
             /*=====Lấy mạng Neural đã được training nhận diện tên màu sắc và truyền mã màu vừa chọn vào để nó nhận diện tên=====*/
-            const resultB = brain.likely(rgb, ColorNameNetwork)
+            const resultB = brain.likely(rgb, ColorNameNetwork);
             $("#example").html(resultB);
         },
         theme: 'bootstrap'
     });
 });
 /*----- Tạo ra mạng Neural thứ nhất. Dùng để đào tạo nhận diện độ đậm nhạt của màu ----*/
-const brain = require('brain.js');
 const ColorDarknetwork = new brain.NeuralNetwork();
 /*------Bắt đầu Training mạng này với tập đầu vào bên dưới ---*/
 ColorDarknetwork.train([
@@ -38,7 +39,7 @@ ColorDarknetwork.train([
     { input: {r: 1, g: 0.42, b: 0.52}, output: { dark: 1 } },
 ]);
 
-/*----- Tạo ra mạng Neural thứ nhất. Dùng để đào tạo nhận diện tên của màu ----*/
+/*----- Tạo ra mạng Neural thứ hai. Dùng để đào tạo nhận diện tên của màu ----*/
 const ColorNameNetwork = new brain.NeuralNetwork();
 /*------Bắt đầu Training mạng này với tập đầu vào bên dưới ---*/
 ColorNameNetwork.train([
