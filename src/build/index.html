@@ -11,38 +11,24 @@
     <script type="text/javascript" src="js/jquery.minicolors.min.js"></script>
     <style>
         body {
-            font-family: helvetica neue;
+            font-family: helvetica sans-serif;
         }
-        #example {
+        #back-ground {
             padding: 100px;
-            background: #ff0000;
-            color: white;
-            font-size: 36px;
-        }
-
-        #wheel-demo{
-            font-size: 24px;
+            background-color: pink;
+            display: flex;
+            justify-content: center;
+            font-size: 36px ;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <div class="well">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <h3>Chọn màu</h3>
-                    <input type="text" id="wheel-demo" class="form-control demo" data-control="wheel" value="#ff99ee">
-                </div>
-            </div>
-            <div class="col-md-9">
-                <div id="example">Example Text</div>
-            </div>
-        </div>
-        <div class="row">
-        </div>
-    </div>
+    <input id="mini-color" value="fff">
+    <div id="back-ground">Test color</div>
 </div>
-<script type="text/javascript" src="bundle.js"></script>
+<script type="text/javascript" src="bundle.js">
+
+</script>
 </body>
 </html>
