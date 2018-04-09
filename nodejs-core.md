@@ -73,3 +73,8 @@ rectangle.circumference(5, 10);
 ```
 8. HTTP Module:
  - Là một module quan trong cho
+ 
+ 
+9. FS module:
+- fs module provide APIs để tương tác với file theo chuẩn phương POSIX 
+
