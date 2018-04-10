@@ -3,7 +3,7 @@ const app = express();
 
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
-const urlencodeParser = bodyParser.urlencoded({ extended: false });
+const urlencodeParser = bodyParser.urlencoded({extended: false});
 
 const port = 3000;
 // routing
@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
    <html>
     <head>
         <link rel="stylesheet" href="assets/style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     </head> 
     <body>
         <h1>Hello world</h1>   
@@ -22,6 +23,15 @@ app.get('/', (req, res) => {
             password: <input type="text" id="password" name="password">
             <button type="submit">submit</button>
         </form>
+        <script type="text/javascript">
+              $.ajax({
+                type:"POST",
+                url:"http://localhost:3000/person",
+                data: JSON.stringify({name:"Anh Tus", age:"26"}),
+                dataType: "json",
+                contentType: "application/json"
+                })   
+        </script>
     </body>
    <html>
    `);
@@ -48,11 +58,12 @@ app.get('/person/:id', (req, res) => {
 app.post('/login', urlencodeParser, (req, res) => {
     if (!req.body) return res.sendStatus(400);
     res.send(`${req.body.user} access url login`);
+    console.log(req.body);
 });
 
 app.post('/person', jsonParser, (req, res) => {
-    if (!req.body) return res.sendStatus(400)
-    // create user in req.body
+    if (!req.body) return res.sendStatus(400);
+    console.log(req.body);
 });
 
 app.listen(port, () => {
