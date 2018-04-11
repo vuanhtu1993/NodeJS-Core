@@ -55,7 +55,7 @@ module.exports = {
     "presets": ["es2015"]
   },
 ```
-7. Module trong nodeJs (hiểu đơn giản module là một file)
+### 2. Module trong nodeJs (hiểu đơn giản module là một file)
 ```
 Module có thể hiểu đơn giản như là một file, trong đó có các hàm cũng
 như biến được export ra bên ngoài cho các file khác sử dụng
@@ -71,10 +71,30 @@ const rectangle = required('/Shape/rectangle');
 rectangle.area(10, 20);
 rectangle.circumference(5, 10);
 ```
-8. HTTP Module:
+### 3. HTTP Module:
  - Là một module quan trong cho
  
  
-9. FS module:
-- fs module provide APIs để tương tác với file theo chuẩn phương POSIX 
+### 4. FS module:
+- fs module provide APIs để tương tác với file theo chuẩn phương POSIX
+
+### 5. MySQL
+```javascript
+    var mysql = require('mysql');
+    
+    app.use('/', function(req, res, next) {
+       const con = mysql.createConnection({
+       host: "localhost",
+       user: "test",
+       password: "test",
+       database: "addressbook"
+       });
+       con.query('query statement', function(rows) {
+           if (err) throw err;
+           console.log(rows);
+       });
+       next();
+    });
+```
+ 
 
