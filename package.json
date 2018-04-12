@@ -4,15 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "start": "webpack-dev-server",
-    "test": "jest"
+    "test": "jest",
+    "precommit": "lint-staged"
   },
   "babel": {
     "presets": [
       "env"
     ],
     "plugins": []
+  },
+  "lint-staged": {
+    "src/**/*.js": ["eslint --fix", "git add"]
   },
   "repository": {
     "type": "git",
@@ -38,7 +40,9 @@
     "expect": "1.20.2",
     "jasmine-node": "^1.14.5",
     "jest": "^22.4.3",
+    "lint-staged": "^7.0.4",
     "mocha": "3.0.0",
+    "prettier": "^1.11.1",
     "supertest": "^3.0.0",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12",
