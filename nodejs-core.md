@@ -55,6 +55,33 @@ module.exports = {
     "presets": ["es2015"]
   },
 ```
+
+### 3. DevTools
+#### Babel (là một transpiler)
+1. Gồm có Babel cli, babel là các babel runner
+```
+   yarn babel folder/file -d folder/file
+ ```
+   2. babel preset là các preset mà babel flow theo
+   ```
+    - Đươc khai báo ở bên trong .babelrc hoặc package.json
+```
+   3. babel loader và babel-core
+   
+#### Webpack
+1.
+#### ESlint (Syntax, coding convention)
+1. tạo file --init (buộc phải có file này)
+2. Chạy file tại folder chứa file .eslintrc
+```
+yarn eslint folder/file.js
+```
+#### Prettier
+1. Cài trong project ko cần config nhưng mặc định chạy từ file ngoài cùng chứa package.json
+```
+yarn prettier "src/**/*.js"
+```
+
 ### 2. Module trong nodeJs (hiểu đơn giản module là một file)
 ```
 Module có thể hiểu đơn giản như là một file, trong đó có các hàm cũng
