@@ -80,6 +80,8 @@ yarn eslint folder/file.js
 1. Cài trong project ko cần config nhưng mặc định chạy từ file ngoài cùng chứa package.json
 ```
 yarn prettier "src/**/*.js"
+script
+"prettier": "prettier --write --tab-width 4 \"src/**/*.js\"",
 ```
 
 ### 2. Module trong nodeJs (hiểu đơn giản module là một file)

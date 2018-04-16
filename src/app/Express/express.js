@@ -1,15 +1,17 @@
 const express = require('express');
+
 const app = express();
 
 const bodyParser = require('body-parser');
+
 const jsonParser = bodyParser.json();
-const urlencodeParser = bodyParser.urlencoded({extended: false});
+const urlencodeParser = bodyParser.urlencoded({ extended: false });
 
 const port = 3000;
 // routing
 app.use('/assets', express.static('../../public'));
 app.get('/', (req, res) => {
-    res.send(`
+  res.send(`
    <html>
     <head>
         <link rel="stylesheet" href="assets/style.css">
@@ -37,11 +39,11 @@ app.get('/', (req, res) => {
    `);
 });
 app.get('/api', (req, res) => {
-    res.json({name: "Anh Tus", age: "26", carrier: "Web developer"});
+  res.json({ name: 'Anh Tus', age: '26', carrier: 'Web developer' });
 });
 app.get('/person/:id', (req, res) => {
-    console.log(req.query);
-    res.send(`
+  console.log(req.query);
+  res.send(`
       <html>
     <head>
         <link rel="stylesheet" href="/assets/style.css">
@@ -52,20 +54,20 @@ app.get('/person/:id', (req, res) => {
     </body>
    <html>
         
-    `)
+    `);
 });
 // body parser
 app.post('/login', urlencodeParser, (req, res) => {
-    if (!req.body) return res.sendStatus(400);
-    res.send(`${req.body.user} access url login`);
-    console.log(req.body);
+  if (!req.body) return res.sendStatus(400);
+  res.send(`${req.body.user} access url login`);
+  console.log(req.body);
 });
 
 app.post('/person', jsonParser, (req, res) => {
-    if (!req.body) return res.sendStatus(400);
-    console.log(req.body);
+  if (!req.body) return res.sendStatus(400);
+  console.log(req.body);
 });
 
 app.listen(port, () => {
-    console.log(`Server running on port: ${port}`);
+  console.log(`Server running on port: ${port}`);
 });

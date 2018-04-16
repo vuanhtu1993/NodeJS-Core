@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "eslint": "eslint --fix \"src/**/Express/*.js\"",
+    "prettier": "prettier --write --tab-width 4 \"src/**/*.js\"",
     "precommit": "lint-staged"
   },
   "babel": {
@@ -14,7 +16,10 @@
     "plugins": []
   },
   "lint-staged": {
-    "src/**/*.js": ["eslint --fix", "git add"]
+    "src/**/*.js": ["eslint", "git add"]
+  },
+  "prettier": {
+    "singleQuote": true
   },
   "repository": {
     "type": "git",
