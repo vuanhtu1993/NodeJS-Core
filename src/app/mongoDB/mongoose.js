@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
-const port = 6789;
+const port = 8888;
 
 // bodyParser middleware
 // create application/json parser
@@ -13,6 +13,26 @@ let urlencodedParser = bodyParser.urlencoded({extended: false});
 const mongoose = require('mongoose');
 mongoose.connect("mongodb://test:test@ds151169.mlab.com:51169/fresher");
 
+// Add headers
+app.use(function (req, res, next) {
+
+	// Website you wish to allow to connect
+	res.setHeader('Access-Control-Allow-Origin', '*');
+
+	// Request methods you wish to allow
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+	// Request headers you wish to allow
+	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+	// Set to true if you need the website to include cookies in the requests sent
+	// to the API (e.g. in case you use sessions)
+	res.setHeader('Access-Control-Allow-Credentials', true);
+
+	// Pass to next layer of middleware
+	next();
+});
+
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
 db.once('open', function () {
@@ -21,57 +41,60 @@ db.once('open', function () {
 // Init schema
 let Schema = mongoose.Schema;
 
-let personScheme = new Schema({
-	firstName: String,
-	lastName: String,
-	address: String,
+let phoneScheme = new Schema({
+	phoneName: String,
+	price: String,
+	description: String,
+	imgUrl: String
 });
 
-let Person = mongoose.model("Person", personScheme);
+let Phone = mongoose.model("Cellphone", phoneScheme);
 
 // API
-app.get('/users', function (req, res) {
-	Person.find()
+app.get('/phones', function (req, res) {
+	Phone.find()
 		.then((data) => res.send(data))
 		.catch((err) => res.send(err))
 });
 
-app.get('/user/:id', function (req, res) {
+app.get('/phone/:id', function (req, res) {
 	const id = req.params.id;
-	Person.findOne({
+	Phone.findOne({
 		_id: id
 	})
 		.then((data) => res.send(data))
 		.catch((err) => res.send(err))
 });
 
-app.post('/users', function (req, res) {
-	const {firstName, lastName, address} = req.body;
-	let newPerson = new Person({
-		firstName,
-		lastName,
-		address,
+app.post('/phones', function (req, res) {
+	const {phoneName, price, description, imgUrl} = req.body;
+	let newPhone = new Phone({
+		phoneName,
+		price,
+		description,
+		imgUrl
 	});
-	newPerson.save()
+	newPhone.save()
 		.then((data) => res.send(data))
 		.catch((err) => res.send(err))
 });
 
-app.put('/user/:id', function (req, res) {
+app.put('/phone/:id', function (req, res) {
 	const _id = {"_id": req.params.id};
-	const {firstName, lastName, address} = req.body;
-	Person.update({_id}, {
-		firstName,
-		lastName,
-		address,
+	const {phoneName, price, description, imgUrl} = req.body;
+	Phone.update({_id}, {
+		phoneName,
+		price,
+		description,
+		imgUrl,
 	})
 		.then((data) => res.send(data)) // here return the item before update
 		.catch((err) => res.send(err))
 });
 
-app.delete('/user/:id', function (req, res) {
+app.delete('/phone/:id', function (req, res) {
 	const _id = req.params.id;
-	Person.deleteOne({_id})
+	Phone.deleteOne({_id})
 		.then((data) => res.send(data))
 		.catch((err) => res.send(err))
 });
