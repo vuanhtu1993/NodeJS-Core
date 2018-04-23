@@ -6,11 +6,10 @@
   "scripts": {
     "eslint": "eslint --fix",
     "prettier": "prettier --single-quote --write",
-    "test": "jest",
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "*.js": [
+    "src/**/mongoDB/*.js": [
       "prettier --single-quote --write",
       "eslint --fix",
       "git add"
