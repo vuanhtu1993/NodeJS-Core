@@ -9,7 +9,7 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "src/**/mongoDB/*.js": [
+    "*.js": [
       "prettier --single-quote --write",
       "eslint --fix",
       "git add"
