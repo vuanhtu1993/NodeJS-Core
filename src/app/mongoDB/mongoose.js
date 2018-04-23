@@ -18,14 +18,20 @@ mongoose.connect('mongodb://test:test@ds151169.mlab.com:51169/fresher');
 
 // Add headers
 app.use((req, res, next) => {
-// Website you wish to allow to connect
+  // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', '*');
 
   // Request methods you wish to allow
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+  );
 
   // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader(
+    'Access-Control-Allow-Headers',
+    'X-Requested-With,content-type',
+  );
 
   // Set to true if you need the website to include cookies in the requests sent
   // to the API (e.g. in case you use sessions)
@@ -47,7 +53,7 @@ const phoneScheme = new Schema({
   phoneName: String,
   price: String,
   description: String,
-  imgUrl: String,
+  imgUrl: String
 });
 
 const Phone = mongoose.model('Cellphone', phoneScheme);
@@ -62,38 +68,38 @@ app.get('/phones', (req, res) => {
 app.get('/phone/:id', (req, res) => {
   const { id } = req.params;
   Phone.findOne({
-    _id: id,
+    _id: id
   })
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
 
 app.post('/phones', (req, res) => {
-  const {
-    phoneName, price, description, imgUrl,
-  } = req.body;
+  const { phoneName, price, description, imgUrl } = req.body;
   const newPhone = new Phone({
     phoneName,
     price,
     description,
-    imgUrl,
+    imgUrl
   });
-  newPhone.save()
+  newPhone
+    .save()
     .then(data => res.send(data))
     .catch(err => res.send(err));
 });
 
 app.put('/phone/:id', (req, res) => {
   const { id } = req.params;
-  const {
-    phoneName, price, description, imgUrl,
-  } = req.body;
-  Phone.update({ _id: id }, {
-    phoneName,
-    price,
-    description,
-    imgUrl,
-  })
+  const { phoneName, price, description, imgUrl } = req.body;
+  Phone.update(
+    { _id: id },
+    {
+      phoneName,
+      price,
+      description,
+      imgUrl
+    }
+  )
     .then(data => res.send(data)) // here return the item before update
     .catch(err => res.send(err));
 });
