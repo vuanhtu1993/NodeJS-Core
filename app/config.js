@@ -3,6 +3,4 @@ const config = {
 	"database": "mongodb://admin:admin@ds263619.mlab.com:63619/medium"
 };
 
-module.exports = {
-	config,
-};
+export default config;

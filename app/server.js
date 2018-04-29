@@ -1,13 +1,12 @@
-const express = require('express');
+import express from 'express';
 const app = express();
 
-const bodyParser = require('body-parser');
-const morgan = require('morgan');
-const mongoose = require('mongoose');
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
+import mongoose from 'mongoose';
 
 
-const jwt = require('jsonwebtoken');
-const { config } = require('./config');
+import config from './config';
 
 const port = process.env.PORT || 8080;
 mongoose.connect(config.database, (err) => {

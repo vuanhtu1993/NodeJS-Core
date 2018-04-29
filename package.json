@@ -22,7 +22,14 @@
     "prettier": "^1.12.1"
   },
   "scripts": {
-    "test": "mocha"
+    "build": "babel app -s -D -d dist",
+    "start": "nodemon --exec babel-node app/server.js",
+    "prestart": "npm run -s build"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
   },
   "repository": {
     "type": "git",

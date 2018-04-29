@@ -1,7 +1,7 @@
 // get instance of mongoose
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
-const md5 = require('md5');
+import md5 from 'md5';
 // Create User Schema
 const userTable = new Schema({
 	email: String,

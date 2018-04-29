@@ -462,3 +462,16 @@ GET /api/tags
 1. Install mongoose 
 2. Create user table
 3. Create config file
+4. Config babel package.json
+```json
+"scripts": {
+    "build": "babel app -s -D -d dist",
+    "start": "nodemon --exec babel-node app/server.js",
+    "prestart": "npm run -s build"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+```
