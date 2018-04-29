@@ -8,7 +8,6 @@ const mongoose = require('mongoose');
 
 const jwt = require('jsonwebtoken');
 const { config } = require('./config');
-const { userTable } = require('./model/user');
 
 const port = process.env.PORT || 8080;
 mongoose.connect(config.database, (err) => {
