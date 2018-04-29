@@ -457,19 +457,8 @@ No additional parameters required
 GET /api/tags
 ```
 
-No authentication required, returns a List of Tags
-
--   [1. Overview](#sec-1)
--   [2. Passing Criteria](#sec-2)
--   [3. API Spec](#sec-3)
-    -   [3.1. Authentication Header:](#sec-3-1)
-    -   [3.2. JSON Objects returned by API](#sec-3-2)
-    -   [3.3. Errors and Status Codes](#sec-3-3)
-    -   [3.4. Endpoints:](#sec-3-4)
-
-Author: Duong Tran
-
-Created: 2018-04-27 Fri 14:32
-
-[Emacs](http://www.gnu.org/software/emacs/) 25.3.1
-([Org-mode](http://orgmode.org) 9.1.7)
+## Doing
+### Step 1: Create user table
+1. Install mongoose 
+2. Create user table
+3. Create config file

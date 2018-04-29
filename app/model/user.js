@@ -13,3 +13,7 @@ const User = new Schema({
 
 // Set up mongoose model
 const userTable = mongoose.model('User', User);
+
+module.exports = {
+	userTable,
+};
