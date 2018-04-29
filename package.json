@@ -1,0 +1,23 @@
+{
+  "name": "webservice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vuanhtu1993/NodeJS-Core.git"
+  },
+  "author": "AnhTus",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vuanhtu1993/NodeJS-Core/issues"
+  },
+  "homepage": "https://github.com/vuanhtu1993/NodeJS-Core#readme"
+}
