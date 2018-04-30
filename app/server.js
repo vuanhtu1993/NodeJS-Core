@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 
 
 import config from './config';
+import router from "./router/index";
 
 const port = process.env.PORT || 8080;
 mongoose.connect(config.database, (err) => {
@@ -29,10 +30,9 @@ app.use(morgan('dev'));
 // =======================
 // routes ================
 // =======================
-// basic route
-app.get('/', function(req, res) {
-	res.send('Hello! The API is at http://localhost:' + port + '/api');
-});
+
+// Declare router
+app.use('/', router);
 
 // =======================
 // start the server ======
