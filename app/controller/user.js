@@ -14,7 +14,6 @@ export const createUser = (req, res) => {
 export const logIn = (req, res) => {
 	const { dataUser } = req.body;
 	let data = _logIn(dataUser);
-	console.log(data);
 	data
 		.then((user) => {
 			const payload = {
