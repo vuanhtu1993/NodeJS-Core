@@ -24,7 +24,9 @@ export const _createUser = (dataUser) => {
 		username: dataUser.username,
 		password: md5(dataUser.password),
 	});
-	return newUser.save();
+	return newUser.save()
+		.then((user) => ({ success: true, user }))
+		.catch((err) => ({ success: false, err: err }));
 };
 
 export const _logIn = (dataUser) => {
