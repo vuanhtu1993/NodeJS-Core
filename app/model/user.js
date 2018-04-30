@@ -54,6 +54,12 @@ export const _logIn = (dataUser) => {
 		})
 };
 
+export const _getUser = () => {
+	return User.find({})
+		.then((users) => ({ users }))
+		.catch((err) => ({ err }))
+};
+
 export const generateToken = (payload, secret) => {
 	return jwt.sign(payload, secret, {expiresIn: 1440});
 
