@@ -6,8 +6,8 @@ import {checkToken} from "../middleware/checkToken";
 const router = express.Router();
 
 // API user
-router.post('/register', createUser);
-router.post('/login', logIn);
+router.post('/api/users', createUser);
+router.post('/api/users/login', logIn);
 
 // API test
 router.get('/abc', checkToken);
