@@ -1,4 +1,5 @@
-import {_createUser, _signIn} from "../model/user";
+
+import {_createUser, _logIn} from "../model/user";
 import jwt from 'jsonwebtoken';
 import config from "../config";
 
@@ -10,9 +11,10 @@ export const createUser = (req, res) => {
 		.catch((err) => res.send(err))
 };
 
-export const signIn = (req, res) => {
-	const {dataUser} = req.body;
-	const data = _signIn(dataUser);
+export const logIn = (req, res) => {
+	const { dataUser } = req.body;
+	let data = _logIn(dataUser);
+	console.log(data);
 	data
 		.then((user) => {
 			const payload = {
@@ -23,7 +25,7 @@ export const signIn = (req, res) => {
 			res.json({
 				success: true,
 				token: token,
-				message: 'Welcome to medium web service !'
+				message: `Welcome ${user.username} to medium web service !`
 			})
 		})
 		.catch((err) => res.send({

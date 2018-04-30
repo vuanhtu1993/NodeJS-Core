@@ -24,6 +24,6 @@ export const _createUser = (dataUser) => {
 	return newUser.save();
 };
 
-export const _signIn = (dataUser) => {
+export const _logIn = (dataUser) => {
 	return User.findOne({username: dataUser.username, password: md5(dataUser.password)});
 };
