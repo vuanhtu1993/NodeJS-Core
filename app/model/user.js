@@ -55,9 +55,9 @@ export const _logIn = (dataUser) => {
 		})
 };
 
-export const _getUser = () => {
-	return User.find({})
-		.then((users) => ({ success: true, users: users }))
+export const _getCurrentUser = (token) => {
+	return User.find({ token: token })
+		.then((user) => ({ success: true, users: user }))
 		.catch((err) => ({ success: false, err: err }))
 };
 

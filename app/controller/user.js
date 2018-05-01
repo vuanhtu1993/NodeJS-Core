@@ -1,4 +1,4 @@
-import {_createUser, _getUser, _logIn} from "../model/user";
+import {_createUser, _getCurrentUser, _logIn} from "../model/user";
 import jwt from 'jsonwebtoken';
 import config from "../config";
 
@@ -14,7 +14,8 @@ export const logIn = async (req, res) => {
 	res.json(data);
 };
 
-export const getUser = async (req, res) => {
-	const data = await _getUser();
+export const getCurrentUser = async (req, res) => {
+	const { token } = req.query;
+	const data = await _getCurrentUser(token);
 	res.json(data);
 };
