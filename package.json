@@ -10,6 +10,7 @@
     "jsonwebtoken": "^8.2.1",
     "md5": "^2.2.1",
     "mongoose": "^5.0.16",
+    "mongoose-timestamps": "^0.0.1",
     "morgan": "^1.9.0"
   },
   "devDependencies": {

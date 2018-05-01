@@ -1,5 +1,6 @@
 // get instance of mongoose
 import mongoose from 'mongoose';
+import timestamps from 'mongoose-timestamps';
 import {_getCurrentUser} from "./user";
 
 const Scheme = mongoose.Schema;
@@ -10,8 +11,6 @@ const articleTable = new Scheme({
 	description: String,
 	body: String,
 	tagList: Array,
-	createdAt: String,
-	updatedAt: String,
 	favorite: Boolean,
 	favoritesCount: Number,
 	author: {
@@ -32,6 +31,11 @@ const articleTable = new Scheme({
 			body: String,
 		}
 	],
+});
+
+articleTable.plugin(timestamps, {
+	createAt: 'createAt',
+	updateAt: 'updateAt',
 });
 
 const Article = mongoose.model('Article', articleTable);
