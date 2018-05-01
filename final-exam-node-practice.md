@@ -461,8 +461,10 @@ GET /api/tags
 ### Step 1: Create user table
 1. Install mongoose 
 2. Create user table
-3. Create config file
-4. Config babel package.json
+3. Create user controller
+4. Create router to deliver API
+5. Create config file
+6. Config babel package.json
 ```json
 "scripts": {
     "build": "babel app -s -D -d dist",
@@ -475,3 +477,14 @@ GET /api/tags
     ]
   },
 ```
+7. Config jwt
+ - concept: khi login vào hệ thống thì trường token của user sẽ được thêm bổ xung bằng một 
+ token được gen ra từ jwt.sign(payload, secret, time_live)
+ Sau đó user sẽ được truyền về client, client sử dụng token đó để xác thực với hệ thống 
+ thông qua phương thức jwt.verify(token)
+ Lưu ý: 
+ 1. token được sử dụng để thiết lập kết nối an toàn với webservice thông qua 3 cách là
+ query || req.body.token || header
+ 2. Có thể không cần phải lưu token vào trong trường của user nhưng nếu lưu thì có thể sử dụng
+ token để tìm kiếm user hiện tại
+ 
