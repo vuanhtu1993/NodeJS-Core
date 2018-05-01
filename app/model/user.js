@@ -37,7 +37,8 @@ export const _logIn = (dataUser) => {
 				username: user.username,
 			};
 			user.token = generateToken(payload, config.secret);
-			return user.save();
+			return user.save()
+				.then((user) => ({ success: true, user: user }));
 		})
 		.catch((err) => {
 			if (err) {
@@ -56,8 +57,8 @@ export const _logIn = (dataUser) => {
 
 export const _getUser = () => {
 	return User.find({})
-		.then((users) => ({ users }))
-		.catch((err) => ({ err }))
+		.then((users) => ({ success: true, users: users }))
+		.catch((err) => ({ success: false, err: err }))
 };
 
 export const generateToken = (payload, secret) => {

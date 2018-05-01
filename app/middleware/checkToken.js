@@ -9,6 +9,7 @@ export const checkToken = (req, res, next) => {
 				console.log(err);
 				return res.json({
 					success: false,
+					err: err,
 					message: 'Failure to authenticate token !'
 				})
 			} else {
