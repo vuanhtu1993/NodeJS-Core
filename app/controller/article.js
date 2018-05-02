@@ -8,6 +8,13 @@ export const addArticle = async (req, res) => {
 };
 
 export const listArticles = async (req, res) => {
-	const data = await _listArticles();
+	const { tag, author } = req.query;
+	let queryParam = {};
+	if (tag) {
+		queryParam = { tagList: tag }
+	} else if (author) {
+		queryParam = { 'author.username': author }
+	}
+	const data = await _listArticles(queryParam);
 	res.json(data);
 };

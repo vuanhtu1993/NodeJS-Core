@@ -13,7 +13,7 @@ router.get('/api/user', checkToken, getCurrentUser);
 
 // API article
 router.post('/api/articles', checkToken, addArticle);
-router.get('/api/articles', checkToken, listArticles);
+router.get('/api/articles', listArticles);
 
 // API test
 router.get('/abc');
