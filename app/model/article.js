@@ -80,6 +80,15 @@ export const _feedArticles = async (token) => {
 		.catch((err) => ({ success: false, error: err }));
 };
 
+export const _updateArticle = (slug, editedArticle) => {
+	console.log(slug, editedArticle);
+	return Article.findOneAndUpdate(
+		{ slug: slug },
+		{ $set: editedArticle })
+		.then((article) => ({ success: true, article: article }))
+		.catch((err) => ({ success: false, error: err }));
+};
+
 export const customFilter = (qP) => {
 	return this.find({
 		$and: [

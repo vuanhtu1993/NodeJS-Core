@@ -1,4 +1,4 @@
-import {_addArticle, _feedArticles, _listArticles} from "../model/article";
+import {_addArticle, _feedArticles, _listArticles, _updateArticle} from "../model/article";
 
 export const addArticle = async (req, res) => {
 	const { dataArticle } = req.body;
@@ -22,5 +22,12 @@ export const listArticles = async (req, res) => {
 export const feedArticles = async (req, res) => {
 	const token = req.body.token || req.query.token || req.headers['x-access-token'];
 	const data = await _feedArticles(token);
+	res.json(data);
+};
+
+export const updateArticle = async (req, res) => {
+	const { slug } = req.params;
+	const { article } = req.body;
+	const data = await _updateArticle(slug, article);
 	res.json(data);
 };
