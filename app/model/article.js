@@ -65,7 +65,13 @@ export const _addArticle = async (dataArticle, token) => {
 		.catch((err) => ({ success: false, err: err }));
 };
 
-export const convertTitleToSlug = (str) => {
+export const _listArticles = () => {
+  return Article.find({})
+		.then((articles) => ({ success: true, articles: articles }))
+		.catch((err) => ({ success: false, error: err }));
+};
+
+const convertTitleToSlug = (str) => {
 	str = str.replace(/[^a-zA-Z0-9\s]/g,"");
 	str = str.toLowerCase();
 	str = str.replace(/\s/g,'-');
