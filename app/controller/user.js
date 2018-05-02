@@ -15,7 +15,7 @@ export const logIn = async (req, res) => {
 };
 
 export const getCurrentUser = async (req, res) => {
-	const { token } = req.query;
+	const token = req.body.token || req.query.token || req.headers['x-access-token'];
 	const data = await _getCurrentUser(token);
 	res.json(data);
 };

@@ -72,6 +72,14 @@ export const _listArticles = (queryParam) => {
 		.catch((err) => ({success: false, error: err}));
 };
 
+export const _feedArticles = async (token) => {
+	const dataCurrentUser = await _getCurrentUser(token);
+	const {_id, username, bio, image} = dataCurrentUser.users[0];
+	return Article.find({ 'author.username': username })
+		.then((articles) => ({ success: true, articles: articles }))
+		.catch((err) => ({ success: false, error: err }));
+};
+
 export const customFilter = (qP) => {
 	return this.find({
 		$and: [
