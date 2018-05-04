@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
     "body-parser": "^1.18.2",
     "eslint": "^4.19.1",
     "express": "^4.16.3",
@@ -23,13 +24,17 @@
     "prettier": "^1.12.1"
   },
   "scripts": {
+    "dev": "nodemon --exec babel-node app/server.js",
     "build": "babel app -s -D -d dist",
-    "start": "nodemon --exec babel-node app/server.js",
+    "start": "node dist/server.js",
     "prestart": "npm run -s build"
   },
   "babel": {
     "presets": [
       "env"
+    ],
+    "plugins": [
+      "transform-runtime"
     ]
   },
   "repository": {
