@@ -14,4 +14,6 @@ ql.add(5,1,0);
 ql.add(5,4,0);
 ql.add(5,5,100);
 
-console.log(ql);
+console.log(ql.rewards);
+ql.learn(500);
+console.log(ql.rewards);
