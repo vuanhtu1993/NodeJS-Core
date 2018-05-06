@@ -53,19 +53,30 @@ export class QLearner {
 		let action = this.currentState.randomAction();
 		if (!action) return null;
 		this.rewards[this.currentState.name] || (this.rewards[this.currentState.name] = {});
-		this.rewards[this.currentState.name][action.name] = (action.reward || 0) + this.gamma * this.optimalFutureValue(action.nextState);
+		this.rewards[this.currentState.name][action.name] = (action.reward || 0) + this.gamma * this.optimalFutureValue(action.nextState).max;
 	}
 	optimalFutureValue(state) {
 		let stateRewards = this.rewards[state];
 		let max = 0;
-		for (let action in stateRewards) {
+		let action;
+		for (action in stateRewards) {
 			if (stateRewards.hasOwnProperty(action)) {
 				max = Math.max(0, stateRewards[action] || 0);
 			}
 		}
-		return max;
+		return { max, action };
 	}
 	randomState() {
 		return this.statesList[~~(this.statesList.length * Math.random())];
+	}
+	findGoodWay(from, to) {
+		let trip = [];
+		while (from != to) {
+			let nextState = this.optimalFutureValue(from).action;
+			trip.push(from);
+			from = nextState;
+		}
+		trip.push(to);
+		console.log(trip);
 	}
 }
