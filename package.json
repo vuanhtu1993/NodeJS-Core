@@ -36,7 +36,10 @@
   "author": "Jason Miller <jason@developit.ca>",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.2.1",
+    "mongoose": "^5.0.17",
+    "mongoose-unique-validator": "^2.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
