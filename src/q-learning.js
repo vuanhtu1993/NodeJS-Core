@@ -77,6 +77,6 @@ export class QLearner {
 			from = nextState;
 		}
 		trip.push(to);
-		console.log(trip);
+		return trip;
 	}
 }

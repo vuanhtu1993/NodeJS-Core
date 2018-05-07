@@ -17,4 +17,5 @@ ql.add(5,5,100);
 console.log(ql.rewards);
 ql.learn(500);
 console.log(ql.rewards);
-ql.findGoodWay(0, 5);
+const trip = ql.findGoodWay(0, 5);
+console.log(trip);
