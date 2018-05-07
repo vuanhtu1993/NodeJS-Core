@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
-
+import md5 from 'md5';
+import uniqueValidator from 'mongoose-unique-validator';
+console.log(md5);
 let UserSchema = new mongoose.Schema({
 	username: {
 		type: String,
@@ -17,6 +19,7 @@ let UserSchema = new mongoose.Schema({
 		match: [/\S+@\S+\.\S+/, 'is invalid'],
 		index: true
 	},
+	password: String,
 	bio: String,
 	image: String,
 	favorites: [{type: mongoose.Schema.Types.ObjectId, ref: 'Article'}],
@@ -24,3 +27,16 @@ let UserSchema = new mongoose.Schema({
 	hash: String,
 	salt: String
 }, {timestamps: true});
+
+UserSchema.plugin(uniqueValidator, { message: 'is already taken!' });
+
+// User feature
+UserSchema.methods.setPassword = function (pwd) {
+	return md5(pwd);
+};
+// Kết nối với bảng User trong DB
+mongoose.model('User', UserSchema);
+// Export Schema User for controller
+const User = mongoose.model('User');
+export default User;
+
