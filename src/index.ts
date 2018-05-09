@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import router from './controllers/api';
-const port = process.env.port || 8000;
+const port = 8000;
 const app = express();
 const url = 'mongodb://test:test@ds117070.mlab.com:17070/testmock';
 
