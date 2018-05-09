@@ -1,11 +1,11 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import bodyParser from 'body-parser';
-import morgan from 'morgan';
+import * as express from 'express';
+import * as mongoose from 'mongoose';
+import * as bodyParser from 'body-parser';
+import * as morgan from 'morgan';
 import router from './controllers/api';
 const port = 8000;
 const app = express();
-const url = 'mongodb://test:test@ds117070.mlab.com:17070/testmock';
+const url = 'mongodb://test:test@ds263619.mlab.com:63619/medium';
 
 //setting body-parser
 app.use(morgan('dev'));

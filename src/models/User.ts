@@ -1,7 +1,6 @@
-import mongoose from 'mongoose';
-import md5 from 'md5';
-import uniqueValidator from 'mongoose-unique-validator';
-console.log(md5);
+import * as mongoose from 'mongoose';
+import * as md5 from 'md5';
+import * as  uniqueValidator from 'mongoose-unique-validator';
 let UserSchema = new mongoose.Schema({
 	username: {
 		type: String,

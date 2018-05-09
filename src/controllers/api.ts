@@ -1,6 +1,5 @@
-import express from 'express';
+import * as express from 'express';
 const router = express.Router();
-const mongoose = require('mongoose');
 import User from '../models/User';
 
 router.post('/api/users', (req, res, next) => {
