@@ -4,7 +4,9 @@
   "description": "Starter project for an ES6 RESTful Express API",
   "main": "dist",
   "scripts": {
-    "dev": "nodemon --exec ts-node src"
+    "dev": "nodemon --exec ts-node src",
+    "build": "yarn tsc --outDir dist",
+    "start": "node dist"
   },
   "repository": {
     "type": "git",
