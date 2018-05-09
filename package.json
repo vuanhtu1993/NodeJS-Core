@@ -4,30 +4,7 @@
   "description": "Starter project for an ES6 RESTful Express API",
   "main": "dist",
   "scripts": {
-    "dev": "nodemon -w src --exec babel-node src",
-    "build": "babel src -s -D -d dist",
-    "start": "node dist",
-    "prestart": "npm run -s build",
-    "test": "eslint src"
-  },
-  "babel": {
-    "presets": [
-      "env"
-    ]
-  },
-  "eslintConfig": {
-    "extends": "eslint:recommended",
-    "parserOptions": {
-      "ecmaVersion": 7,
-      "sourceType": "module"
-    },
-    "env": {
-      "node": true
-    },
-    "rules": {
-      "no-console": 0,
-      "no-unused-vars": 1
-    }
+    "dev": "nodemon --exec ts-node src"
   },
   "repository": {
     "type": "git",
@@ -42,11 +19,14 @@
     "md5": "^2.2.1",
     "mongoose": "^5.0.17",
     "mongoose-unique-validator": "^2.0.1",
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "typescript": "^2.8.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.1"
+    "babel-preset-env": "^1.6.1",
+    "nodemon": "^1.17.4",
+    "ts-node": "^6.0.3"
   },
   "bugs": {
     "url": "https://github.com/developit/express-es6-rest-api/issues"
