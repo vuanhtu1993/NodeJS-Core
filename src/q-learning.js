@@ -53,6 +53,8 @@ export class QLearner {
 		let action = this.currentState.randomAction();
 		if (!action) return null;
 		this.rewards[this.currentState.name] || (this.rewards[this.currentState.name] = {});
+		let temp = this.rewards[this.currentState.name] ;
+		console.log('test' ,temp);
 		this.rewards[this.currentState.name][action.name] = (action.reward || 0) + this.gamma * this.optimalFutureValue(action.nextState).max;
 	}
 	optimalFutureValue(state) {
