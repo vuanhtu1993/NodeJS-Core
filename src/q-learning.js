@@ -28,6 +28,7 @@ export class QLearner {
 	constructor(gamma) {
 		this.gamma = gamma || 0.5;
 		this.rewards = {};
+		this.Q = {};
 		this.states = {};
 		this.statesList = [];
 		this.currentState = null;
@@ -47,22 +48,30 @@ export class QLearner {
 		this.statesList.push(state);
 		return state;
 	}
+	initialQ() {
+    this.statesList.map((state) => {
+			this.Q[state.name] = {};
+			state.actionsList.map((action) => {
+        this.Q[state.name][action.name] = 100;
+			});
+		})
+	}
 	Q_routing(start, end, epsilon, n_loop, alpha) {
 		let nextState = null;
-		for (let i = 0; i < n_loop; i++) {
-			this.currentState = this.getInitialState(start)[0];
-			let flag = false;
-			while (!flag) {
-				let bestAction = this.currentState.getMinRewardAction()[0];
-				nextState = this.getNextState(bestAction);
-			}
-		}
+		// for (let i = 0; i < n_loop; i++) {
+		// 	this.currentState = this.getInitialState(start)[0];
+		// 	let flag = false;
+		// 	while (!flag) {
+		// 		let bestAction = this.currentState.getMinRewardAction()[0];
+		// 		nextState = this.getNextState(bestAction);
+		// 	}
+		// }
 		this.currentState = this.getInitialState(start)[0];
 		console.log(this.currentState);
-    let bestAction = this.currentState.getMinRewardAction()[0];
-    console.log(bestAction);
-    nextState = this.getNextState(bestAction);
-    console.log(nextState);
+    // let bestAction = this.currentState.getMinRewardAction()[0];
+    // console.log(bestAction);
+    // nextState = this.getNextState(bestAction);
+    // console.log(nextState);
 	};
 	learn(steps) {
     steps = Math.max(1, steps || 0);

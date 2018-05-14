@@ -40,11 +40,12 @@ ql.add(8,7,12);
 
 
 // ql.learn(500);
-// // console.log(ql.rewards);
-// // const trip = ql.findGoodWay(0, 5);
-// // console.log(trip);
-// const object = JSON.parse(JSON.stringify(ql));
-//
-// console.dir(object, {depth: null, colors: true});
+// console.log(ql);
+// const trip = ql.findGoodWay(0, 5);
+// console.log(trip);
+// ql.initialQ();
+const object = JSON.parse(JSON.stringify(ql));
 
-ql.Q_routing(1);
+console.dir(object, {depth: null, colors: true});
+
+// ql.Q_routing(1);
