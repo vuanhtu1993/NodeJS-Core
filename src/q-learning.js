@@ -4,24 +4,27 @@ class State {
 		this.actions = {};
 		this.actionsList = [];
 	}
-  addAction(nextState, reward, actionName) {
-    let action = {
-    	name: actionName || nextState,
+
+	addAction(nextState, reward, actionName) {
+		let action = {
+			name: actionName || nextState,
 			nextState,
 			reward
 		};
 		this.actions[action.name] = action;
 		this.actionsList.push(action);
 	}
+
 	randomAction() {
 		return this.actionsList[~~(this.actionsList.length * Math.random())]
 	}
-	getMinRewardAction() {
-		const minReward = Math.min(...this.actionsList.map(action => action.reward));
-    return this.actionsList.filter(function (action) {
-			return action.reward == minReward;
-		})
-	}
+
+	// getMinRewardAction() {
+	// 	const minReward = Math.min(...this.actionsList.map(action => action.reward));
+	//  return this.actionsList.filter(function (action) {
+	// 		return action.reward == minReward;
+	// 	})
+	// }
 }
 
 export class QLearner {
@@ -33,7 +36,8 @@ export class QLearner {
 		this.statesList = [];
 		this.currentState = null;
 	}
-  add(from, to, reward, actionName) {
+
+	add(from, to, reward, actionName) {
 		if (!this.states[from]) {
 			this.addState(from);
 		}
@@ -42,20 +46,28 @@ export class QLearner {
 		}
 		this.states[from].addAction(to, reward, actionName)
 	}
+
 	addState(name) {
 		let state = new State(name);
 		this.states[name] = state;
 		this.statesList.push(state);
 		return state;
 	}
+
 	initialQ() {
-    this.statesList.map((state) => {
+		this.statesList.map((state) => {
 			this.Q[state.name] = {};
 			state.actionsList.map((action) => {
-        this.Q[state.name][action.name] = 100;
+				this.Q[state.name][action.name] = 100;
 			});
 		})
-	}
+	};
+
+	followQ(currentState) {
+		console.log(currentState);
+		return this.minimumFutureValue(this.Q[currentState.name])
+	};
+
 	Q_routing(start, end, epsilon, n_loop, alpha) {
 		let nextState = null;
 		// for (let i = 0; i < n_loop; i++) {
@@ -67,19 +79,19 @@ export class QLearner {
 		// 	}
 		// }
 		this.currentState = this.getInitialState(start)[0];
-		console.log(this.currentState);
-    // let bestAction = this.currentState.getMinRewardAction()[0];
-    // console.log(bestAction);
-    // nextState = this.getNextState(bestAction);
-    // console.log(nextState);
+		let bestAction = this.followQ(this.currentState);
+		// nextState = this.getNextState(bestAction);
+		// console.log(nextState);
 	};
+
 	learn(steps) {
-    steps = Math.max(1, steps || 0);
-    while (steps--) {
+		steps = Math.max(1, steps || 0);
+		while (steps--) {
 			this.currentState = this.randomState();
 			this.step();
 		}
 	}
+
 	step() {
 		this.currentState || this.currentState.randomState();
 		let action = this.currentState.randomAction(); // chon Q min
@@ -87,9 +99,21 @@ export class QLearner {
 		this.rewards[this.currentState.name] || (this.rewards[this.currentState.name] = {});
 		let currentQ = this.rewards[this.currentState.name][action.name]; // Q(current)
 		let currentR = action.reward; // R(current)
-		let newQ = (currentQ || 0) + this.gamma *((currentR || 0) + this.optimalFutureValue(action.nextState).max - (currentQ || 0));
+		let newQ = (currentQ || 0) + this.gamma * ((currentR || 0) + this.optimalFutureValue(action.nextState).max - (currentQ || 0));
 		this.rewards[this.currentState.name][action.name] = Math.round(newQ)
 	}
+
+	minimumFutureValue(_q) {
+		let min = 999;
+		let e;
+		for (e in _q) {
+			if (_q.hasOwnProperty(e)) {
+				min = Math.min(999, _q[e] || 0);
+			}
+		}
+		return {e, min};
+	}
+
 	optimalFutureValue(state) {
 		let stateRewards = this.rewards[state];
 		let max = 0;
@@ -99,21 +123,25 @@ export class QLearner {
 				max = Math.max(0, stateRewards[action] || 0);
 			}
 		}
-		return { max, action };
+		return {max, action};
 	}
+
 	randomState() {
 		return this.statesList[~~(this.statesList.length * Math.random())];
 	}
+
 	getInitialState(start) {
 		return this.statesList.filter(function (state) {
 			return state.name == start;
 		});
 	};
+
 	getNextState(bestAction) {
 		return this.statesList.filter(function (state) {
 			return state.name == bestAction.name;
 		})
 	};
+
 	findGoodWay(from, to) {
 		let trip = [];
 		while (from != to) {
