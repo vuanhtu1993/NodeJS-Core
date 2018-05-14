@@ -49,13 +49,14 @@ export class QLearner {
 	}
 	Q_routing(start, end, epsilon, n_loop, alpha) {
 		let nextState = null;
-		// for (let i = 0; i < n_loop; i++) {
-		// 	this.currentState = this.getInitialState(start)[0];
-		// 	let flag = false;
-		// 	while (!flag) {
-		// 		let bestAction = this.currentState.getMinRewardAction()[0];
-		// 	}
-		// }
+		for (let i = 0; i < n_loop; i++) {
+			this.currentState = this.getInitialState(start)[0];
+			let flag = false;
+			while (!flag) {
+				let bestAction = this.currentState.getMinRewardAction()[0];
+				nextState = this.getNextState(bestAction);
+			}
+		}
 		this.currentState = this.getInitialState(start)[0];
 		console.log(this.currentState);
     let bestAction = this.currentState.getMinRewardAction()[0];
