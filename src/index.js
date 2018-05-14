@@ -35,14 +35,16 @@ ql.add(7,6,7);
 ql.add(7,8,12);
 ql.add(8,3,99);
 ql.add(8,4,14);
-ql.add(8,6,99);
+ql.add(8,6,10);
 ql.add(8,7,12);
 
 
-ql.learn(500);
-// console.log(ql.rewards);
-// const trip = ql.findGoodWay(0, 5);
-// console.log(trip);
-const object = JSON.parse(JSON.stringify(ql));
+// ql.learn(500);
+// // console.log(ql.rewards);
+// // const trip = ql.findGoodWay(0, 5);
+// // console.log(trip);
+// const object = JSON.parse(JSON.stringify(ql));
+//
+// console.dir(object, {depth: null, colors: true});
 
-console.dir(object, {depth: null, colors: true});
+ql.Q_routing(1);
