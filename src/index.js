@@ -44,8 +44,6 @@ ql.add(8,7,12);
 // const trip = ql.findGoodWay(0, 5);
 // console.log(trip);
 ql.initialQ();
+ql.Q_routing(0, 8, 10000);
 const object = JSON.parse(JSON.stringify(ql));
-
 console.dir(object, {depth: null, colors: true});
-
-ql.Q_routing(1);
