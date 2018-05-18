@@ -1,7 +1,7 @@
 {
   "name": "express-es6-rest-api",
   "version": "0.3.0",
-  "description": "Starter project for an ES6 RESTful Express API",
+  "description": "Starter project for an ES6 ",
   "main": "dist",
   "scripts": {
     "dev": "nodemon -w src --exec babel-node src",
@@ -10,65 +10,19 @@
     "prestart": "npm run -s build",
     "test": "eslint src"
   },
-  "babel": {
-    "presets": [
-      "es2015", "stage-0"
-    ]
-  },
-  "eslintConfig": {
-    "extends": "eslint:recommended",
-    "parserOptions": {
-      "ecmaVersion": 7,
-      "sourceType": "module"
-    },
-    "env": {
-      "node": true
-    },
-    "rules": {
-      "no-console": 0,
-      "no-unused-vars": 1
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/developit/express-es6-rest-api.git"
   },
-  "author": "Jason Miller <jason@developit.ca>",
+  "author": "",
   "license": "MIT",
   "dependencies": {
-    "base64-img": "^1.0.3",
-    "body-parser": "^1.13.3",
-    "compression": "^1.5.2",
-    "cors": "^2.7.1",
-    "del": "^3.0.0",
-    "exceljs": "^0.6.2",
-    "express": "^4.13.3",
-    "fs.extra": "^1.3.2",
-    "jsonwebtoken": "^7.4.1",
-    "moment": "^2.18.1",
-    "mongodb": "^2.2.30",
-    "morgan": "^1.8.2",
-    "multer": "^1.3.0",
-    "nodemailer": "^4.0.1",
-    "nodemailer-smtp-transport": "^2.7.4",
-    "password-hash": "^1.2.2",
-    "rand-token": "^0.3.0",
-    "resource-router-middleware": "^0.6.0",
-    "sha1": "^1.1.1",
-    "simple-encryptor": "^1.1.0",
-    "validator": "^8.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.9.0",
-    "babel-core": "^6.9.0",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-stage-0": "^6.5.0",
-    "eslint": "^3.1.1",
-    "nodemon": "^1.9.2"
   },
   "bugs": {
-    "url": "https://github.com/developit/express-es6-rest-api/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/developit/express-es6-rest-api#readme",
+  "homepage": "",
   "keywords": []
 }
