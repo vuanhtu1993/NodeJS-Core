@@ -2,9 +2,9 @@ import express from 'express';
 import http from 'http';
 import ejs from 'ejs';
 const app = express();
-app.use(express.static(__dirname + '/public'));
-app.set('views', '../public/views');
+
 app.set('view engine', 'ejs');
+
 const port = process.env.port || 8000;
 const server = http.Server(app);
 
