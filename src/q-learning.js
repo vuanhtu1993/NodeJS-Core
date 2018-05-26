@@ -68,8 +68,7 @@ export class QLearner {
 		start = this.getState(start)[0];
 		this.trip.push(start.name);
 		while (start.name != end) {
-			let bestAction = this.minimumFutureValue(start);
-			// let bestAction = this.optimalFutureValue(start); // sai
+			let bestAction = this.minimumFutureValueToFindTrip(start);
 			this.trip.push(bestAction.name);
 			start = this.getNextState(bestAction)[0];
 		}
@@ -143,6 +142,36 @@ export class QLearner {
 		// console.log(bestAction);
 		return bestAction;
 	}
+
+  minimumFutureValueToFindTrip(state) {
+    let _q = this.Q[state.name];
+    let min = 9999;
+    for (let a in _q) {
+      if (min > _q[a]) {
+        min = _q[a];
+      }
+    }
+
+    let tempObj = {};
+    let tempArr = [];
+    for (let a in _q) {
+      if (_q[a] == min) {
+        tempArr.push(a);
+        tempObj[a] = min;
+      }
+    }
+    let bestAction = { name: "", reward: 0 };
+    let action	= tempArr[~~(Math.random()*tempArr.length)];
+    console.log(action);
+    for (let a in _q) {
+      if (a == action) {
+        bestAction.name = action;
+        bestAction.reward = _q[a];
+      }
+    }
+    // console.log(bestAction);
+    return bestAction;
+  }
 
 	optimalFutureValue(state) {
 		let stateRewards = this.Q[state.name];

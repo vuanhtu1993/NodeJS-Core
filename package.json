@@ -1,7 +1,7 @@
 {
-  "name": "express-es6-rest-api",
-  "version": "0.3.0",
-  "description": "Starter project for an ES6 RESTful Express API",
+  "name": "Q-Learning-Project",
+  "version": "1.0",
+  "description": "Q-Learning Project",
   "main": "dist",
   "scripts": {
     "dev": "nodemon --exec babel-node src",
@@ -15,9 +15,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/developit/express-es6-rest-api.git"
+    "url": "https://github.com/vuanhtu1993/NodeJS-Core/tree/Learn/Q-Learning/"
   },
-  "author": "Jason Miller <jason@developit.ca>",
+  "author": "Anh Tus",
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
@@ -25,8 +25,8 @@
     "babel-preset-env": "^1.7.0"
   },
   "bugs": {
-    "url": "https://github.com/developit/express-es6-rest-api/issues"
+    "url": "https://github.com/vuanhtu1993/NodeJS-Core/tree/Learn/Q-Learning/src"
   },
-  "homepage": "https://github.com/developit/express-es6-rest-api#readme",
+  "homepage": "https://github.com/vuanhtu1993/NodeJS-Core/tree/Learn/Q-Learning/src",
   "keywords": []
 }
