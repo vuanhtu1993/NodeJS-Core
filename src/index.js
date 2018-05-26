@@ -41,6 +41,6 @@ ql.add(8,7,12);
 
 ql.initialQ();
 ql.Q_routing(0, 8, 1000);
-const object = JSON.parse(JSON.stringify(ql.Q));
+const object = JSON.parse(JSON.stringify(ql));
 console.dir(object, {depth: null, colors: true});
 
