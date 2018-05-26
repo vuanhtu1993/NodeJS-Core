@@ -68,24 +68,8 @@ export class QLearner {
     let otherTrip = [];
     start = this.getState(start)[0];
     otherTrip.push(String(start.name));
-    // for (let i = 0; i < 10; i++) {
-    //   while (start.name != end) {
-    //     let bestAction = this.minimumFutureValueToFindTrip(start);
-    //     otherTrip.push(bestAction.name);
-    //     start = this.getNextState(bestAction)[0];
-    //   }
-      // if (this.trips.length <= 0) {
-      //   this.trips.push(otherTrip);
-      // } else {
-      //   for (let i = 0; i < this.trips.length; i++) {
-      //     if (JSON.stringify(otherTrip) !== JSON.stringify(this.trips[i])) {
-      //       this.trips.push(otherTrip);
-      //     }
-      //   }
-      // }
-    // }
     while (start.name != end) {
-      let bestAction = this.minimumFutureValueToFindTrip(start);
+      let bestAction = this.minimumFutureValue(start);
       otherTrip.push(bestAction.name);
       start = this.getNextState(bestAction)[0];
     }
@@ -111,6 +95,7 @@ export class QLearner {
     for (let i = 0; i < 10; i++) {
       arrTrips.push(this.findGoodWay(start, end));
     }
+    // finding multiple best ways using reduce ()
     this.trips = arrTrips.reduce((accumulator, currentValue) => {
       if (accumulator.length <= 0) {
         return [currentValue];
@@ -129,30 +114,10 @@ export class QLearner {
     },[]);
   };
 
-  // learn(steps) {
-  // 	steps = Math.max(1, steps || 0);
-  // 	while (steps--) {
-  // 		this.currentState = this.randomState();
-  // 		this.step();
-  // 	}
-  // }
-
-  // step() {
-  // 	this.currentState || this.currentState.randomState();
-  // 	let action = this.currentState.randomAction(); // chon Q min
-  // 	if (!action) return null;
-  // 	this.rewards[this.currentState.name] || (this.rewards[this.currentState.name] = {});
-  // 	let currentQ = this.rewards[this.currentState.name][action.name]; // Q(current)
-  // 	let currentR = action.reward; // R(current)
-  // 	let newQ = (currentQ || 0) + this.gamma * ((currentR || 0) + this.optimalFutureValue(action.nextState).max - (currentQ || 0));
-  // 	this.rewards[this.currentState.name][action.name] = Math.round(newQ)
-  // }
-
   minimumFutureValue(state) {
     let _q = this.Q[state.name];
     let min = 9999;
     for (let a in _q) {
-      // min = _q[a];
       if (min > _q[a]) {
         min = _q[a];
       }
@@ -176,34 +141,6 @@ export class QLearner {
       }
     }
     // console.log(bestAction);
-    return bestAction;
-  }
-
-  minimumFutureValueToFindTrip(state) {
-    let _q = this.Q[state.name];
-    let min = 9999;
-    for (let a in _q) {
-      if (min > _q[a]) {
-        min = _q[a];
-      }
-    }
-
-    let tempObj = {};
-    let tempArr = [];
-    for (let a in _q) {
-      if (_q[a] == min) {
-        tempArr.push(a);
-        tempObj[a] = min;
-      }
-    }
-    let bestAction = {name: "", reward: 0};
-    let action = tempArr[~~(Math.random() * tempArr.length)];
-    for (let a in _q) {
-      if (a == action) {
-        bestAction.name = action;
-        bestAction.reward = _q[a];
-      }
-    }
     return bestAction;
   }
 
