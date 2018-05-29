@@ -1,67 +1,36 @@
 // get instance of mongoose
 import mongoose from 'mongoose';
-
 const Schema = mongoose.Schema;
 import md5 from 'md5';
-import config from "../config";
 import jwt from 'jsonwebtoken';
+
 // Create User Schema
-const userTable = new Schema({
-	email: String,
-	token: String,
-	username: String,
-	password: String,
-	bio: String,
-	image: String
-});
+const UserSchema = new Schema({
+  email: {
+    type: String,
+    lowercase: true,
+    unique: true,
+    required: [true, "can't be blank"],
+    match: [/\S+@\S+\.\S+/, 'is invalid'],
+    index: true,
+  },
+  token: String,
+  username: String,
+  password: String,
+  favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Article' }],
+  following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  bio: String,
+  image: String,
+}, {timestamps: true});
 
 // Set up mongoose model
-const User = mongoose.model('User', userTable);
+const User = mongoose.model('User', UserSchema);
 
-export const _createUser = (dataUser) => {
-	const newUser = new User({
-		email: dataUser.email,
-		username: dataUser.username,
-		password: md5(dataUser.password),
-	});
-	return newUser.save()
-		.then((user) => ({ success: true, user }))
-		.catch((err) => ({ success: false, err: err }));
+UserSchema.methods.setPassword = function(plainPW) {
+  return this.password = md5(plainPW);
 };
-
-export const _logIn = (dataUser) => {
-	return User.findOne({username: dataUser.username, password: md5(dataUser.password)})
-		.then((user) => {
-			const payload = {
-				id: user._id,
-				username: user.username,
-			};
-			user.token = generateToken(payload, config.secret);
-			return user.save()
-				.then((user) => ({ success: true, user: user }));
-		})
-		.catch((err) => {
-			if (err) {
-				return {
-					success: false,
-					message: 'Weather username or password incorrect !',
-				}
-			} else {
-				return {
-					success: false,
-					message: 'System cannot handle authentication !',
-				}
-			}
-		})
-};
-
-export const _getCurrentUser = (token) => {
-	return User.find({ token: token })
-		.then((user) => ({ success: true, users: user }))
-		.catch((err) => ({ success: false, err: err }))
-};
-
 export const generateToken = (payload, secret) => {
-	return jwt.sign(payload, secret, {expiresIn: 1440});
+  return jwt.sign(payload, secret, {expiresIn: 1440});
 
 };
+export default User;
