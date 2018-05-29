@@ -23,14 +23,14 @@ const UserSchema = new Schema({
   image: String,
 }, {timestamps: true});
 
-// Set up mongoose model
-const User = mongoose.model('User', UserSchema);
-
 UserSchema.methods.setPassword = function(plainPW) {
   return this.password = md5(plainPW);
 };
 export const generateToken = (payload, secret) => {
   return jwt.sign(payload, secret, {expiresIn: 1440});
-
 };
+
+// Set up mongoose model after all built methods
+const User = mongoose.model('User', UserSchema);
+
 export default User;

@@ -1,5 +1,5 @@
 import express from 'express';
-import {createUser, getCurrentUser, logIn} from "../controller/user";
+import {registerUser, getCurrentUser, logIn} from "../controller/user";
 import {checkToken} from "../middleware/checkToken";
 import {addArticle, feedArticles, listArticles, updateArticle} from "../controller/article";
 
@@ -7,9 +7,9 @@ import {addArticle, feedArticles, listArticles, updateArticle} from "../controll
 const router = express.Router();
 
 // API user
-router.post('/api/users', createUser);
-router.post('/api/users/login', logIn);
-router.get('/api/user', checkToken, getCurrentUser);
+router.post('/api/users', registerUser);
+router.post('/api/users/login');
+router.get('/api/user', checkToken);
 
 // API article
 router.post('/api/articles', checkToken, addArticle);
