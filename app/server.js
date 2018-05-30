@@ -31,7 +31,7 @@ app.use(morgan('dev'));
 // routes ================
 // =======================
 
-// Declare router
+// Declaration connect to router
 app.use('/', router);
 
 // =======================

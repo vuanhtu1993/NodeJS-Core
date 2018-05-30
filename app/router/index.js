@@ -9,13 +9,13 @@ const router = express.Router();
 // API user
 router.post('/api/users', registerUser);
 router.post('/api/users/login', login);
-router.get('/api/user', checkToken);
+router.get('/api/user');
 
 // API article
-router.post('/api/articles', addArticle);
+router.post('/api/articles', checkToken, addArticle);
 router.get('/api/articles', getAllArticle);
 router.put('/api/articles/:slug');
-router.get('/api/articles/feed', getArticleByAuthor);
+router.get('/api/articles/feed', checkToken, getArticleByAuthor);
 
 // API test
 router.get('/abc');
