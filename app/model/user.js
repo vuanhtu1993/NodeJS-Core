@@ -26,6 +26,11 @@ const UserSchema = new Schema({
 UserSchema.methods.setPassword = function(plainPW) {
   return this.password = md5(plainPW);
 };
+
+UserSchema.methods.generateToken = function (payload, secret) {
+  return this.token = jwt.sign(payload, secret, {expiresIn: 1440});
+};
+
 export const generateToken = (payload, secret) => {
   return jwt.sign(payload, secret, {expiresIn: 1440});
 };

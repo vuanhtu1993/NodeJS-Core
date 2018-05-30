@@ -1,5 +1,5 @@
 import express from 'express';
-import {registerUser, getCurrentUser, logIn} from "../controller/user";
+import {registerUser, login} from "../controller/user";
 import {checkToken} from "../middleware/checkToken";
 import {addArticle, feedArticles, listArticles, updateArticle} from "../controller/article";
 
@@ -8,7 +8,7 @@ const router = express.Router();
 
 // API user
 router.post('/api/users', registerUser);
-router.post('/api/users/login');
+router.post('/api/users/login', login);
 router.get('/api/user', checkToken);
 
 // API article
