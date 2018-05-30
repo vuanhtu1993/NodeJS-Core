@@ -12,20 +12,27 @@ export function registerUser(req, res) {
     .catch((err) => res.send(err));
 }
 
-export function login(req, res) {
+export async function login(req, res) {
   const {email, password} = req.body.userData;
   const payload = {email, password};
-  User.findOne({email: email})
-    .then((user) => {
-      if (user.password === md5(password)) {
-        user.token = user.generateToken(payload, config.secret);
-        console.log(user);
-        user.save()
-          .then((user) => res.send(user))
-          .catch((err) => res.send({success: false, error: err}));
-      } else {
-        res.send({success: false, message: 'email or password is wrong!'})
-      }
-    })
-    .catch((err) => res.send({success: false, error: err}));
+  try {
+    let user = await User.findOne({email: email});
+    if (user.password === md5(password)) {
+      user.token = user.generateToken(payload, config.secret);
+      let savedUser = await user.save();
+      res.send({ success: true, savedUser })
+    } else {
+      res.send({success: false, message: 'email or password is wrong!'})
+    }
+  } catch (e) {
+    res.send(e);
+  }
+}
+
+function handleError(e) {
+
+}
+
+class MyError extends Error {
+
 }
