@@ -1,33 +1,39 @@
-import {_addArticle, _feedArticles, _listArticles, _updateArticle} from "../model/article";
+import Article from '../model/article';
+import User from '../model/user';
 
-export const addArticle = async (req, res) => {
-	const { dataArticle } = req.body;
-	const { token } = req.query;
-	const data = await _addArticle(dataArticle, token);
-	res.json(data);
-};
+export async function addArticle(req, res) {
+  const token = req.headers['x-access-token'];
+  const {title, description, body, tagList} = req.body.article;
+	let article = new Article({title, description, body, tagList});
+	article.slug = article.convertTitleToSlug(title);
+	try {
+    let user = await User.findOne({token: token});
+    article.author = user;
+    await article.save();
+    res.send({success: true, article: article})
+  } catch (err) {
+	  res.send({success: false, error: err})
+  }
+}
 
-export const listArticles = async (req, res) => {
-	const { tag, author } = req.query;
-	let queryParam = {};
-	if (tag) {
-		queryParam = { tagList: tag }
-	} else if (author) {
-		queryParam = { 'author.username': author }
-	}
-	const data = await _listArticles(queryParam);
-	res.json(data);
-};
+export async function getAllArticle(req, res) {
+  try {
+    // Populate trường author đươc lấy trong bảng User
+    let articles = await Article.find({}).populate('author');
+    res.status(200).send({success: true, articles: articles});
+  } catch (err){
+    res.status(404).send({success: false, error: err})
+  }
+}
 
-export const feedArticles = async (req, res) => {
-	const token = req.body.token || req.query.token || req.headers['x-access-token'];
-	const data = await _feedArticles(token);
-	res.json(data);
-};
-
-export const updateArticle = async (req, res) => {
-	const { slug } = req.params;
-	const { article } = req.body;
-	const data = await _updateArticle(slug, article);
-	res.json(data);
-};
+export async function getArticleByAuthor(req, res) {
+  const token = req.headers['x-access-token'];
+  try {
+    let user = await User.findOne({token: token});
+    // Nếu cần tường minh trường nào thì populate trường đó (đã config thuộc tính ref trong schema)
+    let articles = await Article.find({author: user._id}).populate('author');
+    res.status(200).send({success: true, articles: articles});
+  } catch (err){
+    res.status(404).send({success: false, error: err})
+  }
+}

@@ -13,7 +13,7 @@ export function registerUser(req, res) {
 }
 
 export async function login(req, res) {
-  const {email, password} = req.body.userData;
+  const {email, password} = req.body.user;
   const payload = {email, password};
   try {
     let user = await User.findOne({email: email});
