@@ -20,4 +20,15 @@ router.get('/api/articles/feed', checkToken, getArticleByAuthor);
 // API test
 router.get('/abc');
 
+//API test handlebars engine
+router.get('/home', (req, res) => {
+  res.render('index');
+});
+router.get('/login', (req, res) => {
+  res.render('login');
+});
+router.get('/register', (req, res) => {
+  res.render('register');
+});
+
 export default router;

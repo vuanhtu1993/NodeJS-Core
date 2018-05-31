@@ -2,6 +2,14 @@ import express from 'express';
 
 const app = express();
 
+// =======================
+// engine ==============
+// =======================
+import path from 'path';
+import exphbs from 'express-handlebars';
+app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
+app.set('view engine', 'handlebars');
+
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import mongoose from 'mongoose';
